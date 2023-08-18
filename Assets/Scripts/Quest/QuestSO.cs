@@ -16,6 +16,9 @@ public class QuestSO : ScriptableObject
     [Header("Requirements")]
     public int levelRequirement;
 
+    [Header("Progress")]
+    public QuestProgress initalProgress = QuestProgress.REQUIREMENTS_NOT_MET;
+
     public QuestSO[] questPrerequisites;
 
     [Header("Steps")]

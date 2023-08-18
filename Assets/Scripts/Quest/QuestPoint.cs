@@ -11,8 +11,6 @@ public class QuestPoint : MonoBehaviour
     [SerializeField] private QuestSO questInfo;
 
     [SerializeField] private bool isPlayerNear = false;
-    [SerializeField] private bool isStartingPoint = false;
-    [SerializeField] private bool isFinishedPoint = false;
 
     private string questId;
     private QuestProgress currentQuestProgress;
@@ -29,13 +27,11 @@ public class QuestPoint : MonoBehaviour
     private void OnEnable()
     {
         GameEventHandler.Instance.OnQuestChanged += QuestStateChanged;
-        GameEventHandler.Instance.OnInitializeQuests += CanStartQuest;
     }
 
     private void OnDisable()
     {
         GameEventHandler.Instance.OnQuestChanged -= QuestStateChanged;
-        GameEventHandler.Instance.OnInitializeQuests -= CanStartQuest;
     }
 
     private void Update()
@@ -56,7 +52,6 @@ public class QuestPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
-            
         }
     }
 
@@ -66,13 +61,12 @@ public class QuestPoint : MonoBehaviour
 
         if (hasStarted) return;
        
-        if (currentQuestProgress.Equals(QuestProgress.CAN_START) && isStartingPoint)
+        if (currentQuestProgress.Equals(QuestProgress.CAN_START))
         {
-            Debug.Log("starting quuest");
             hasStarted = true;
             GameEventHandler.Instance.OnStartQuest?.Invoke(questId);
         }
-        else if(currentQuestProgress.Equals(QuestProgress.CAN_FINISH) && isFinishedPoint)
+        else if(currentQuestProgress.Equals(QuestProgress.CAN_FINISH))
         {
             GameEventHandler.Instance.OnFinishQuest?.Invoke(questId);
         }
@@ -83,7 +77,7 @@ public class QuestPoint : MonoBehaviour
         if(quest.info.id.Equals(questId))
         {
             currentQuestProgress = quest.progress;
-            progressVisual.ChangeState(currentQuestProgress, isStartingPoint, isFinishedPoint);
+            //progressVisual.ChangeState(currentQuestProgress);
             Debug.Log("Quest with id: " + questId + " updated to state: " + currentQuestProgress);
 
             if(quest.progress == QuestProgress.CAN_FINISH)

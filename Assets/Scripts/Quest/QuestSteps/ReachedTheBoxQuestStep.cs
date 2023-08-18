@@ -23,9 +23,7 @@ public class ReachedTheBoxQuestStep : QuestStep
     public void Update()
     {
         float dist = Vector3.Distance(transform.position, player.position);
-        Debug.Log(dist);
         if(dist < 2f) ReachedTheBox();
-
     }
 
     public void ReachedTheBox() => FinishedQuestStep();

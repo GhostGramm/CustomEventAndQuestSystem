@@ -10,7 +10,7 @@ public class QuestHandler : Singleton<QuestHandler>
     public bool LoadSavedQuestStates = true;
     private Dictionary<string, Quest> _AllQuests = new Dictionary<string, Quest>();
 
-    public int currentPlayerLevel;
+    public int currentPlayerLevel = 1;
 
     private void Awake()
     {
@@ -115,7 +115,7 @@ public class QuestHandler : Singleton<QuestHandler>
     public void ClaimRewards(Quest quest)
     {
         //Events for claiming the rewards;
-        GameEventHandler.Instance.OnPlayerLevelChanged?.Invoke(2);
+        //GameEventHandler.Instance.OnPlayerLevelChanged?.Invoke(2);
     }
 
     private void ChangeQuestState(string _id, QuestProgress _progress)

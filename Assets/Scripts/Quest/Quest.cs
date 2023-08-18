@@ -39,7 +39,7 @@ public class Quest
     public Quest(QuestSO questInfo)
     {
         info = questInfo;
-        progress = QuestProgress.REQUIREMENTS_NOT_MET;
+        progress = questInfo.initalProgress;
         currentQuestStepIndex = 0;
         questStepStates = new QuestStepState[info.questStepPrefabs.Length];
         for (int i = 0; i < questStepStates.Length; i++)

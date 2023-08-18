@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 public class GameEventHandler : Singleton<GameEventHandler>
 {
-    public Action OnGameStarted;
+    #region QuestEvents
+
     public Action OnCoinCollected;
     public Action OnReachedTheBox;
+    public Action OnPlayerLogin;
+    public Action<bool> OnPlayForTenMinutes;
+
+    #endregion
+
+    public Action OnGameStarted;
+
     public Action OnJumpPressed;
     public Action OnInitializeQuests;
 
@@ -19,14 +27,4 @@ public class GameEventHandler : Singleton<GameEventHandler>
 
     public Action<int> OnPlayerLevelChanged;
     public Action<string, int, QuestStepState> OnQuesteStepStateChanged;
-
-
-    private void Start()
-    {
-
-    }
-
-    private void StartGame() => OnGameStarted?.Invoke();
-
-    private void initializeQuest() => OnInitializeQuests?.Invoke();
 }

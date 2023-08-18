@@ -16,7 +16,7 @@ public class PlayerStateMachine : StateMachine
     {
         Init();
 
-        Invoke(nameof(IncreaseLevel), 3f);
+        Invoke(nameof(invokeEvents), 1f);
     }
 
     public void Init()
@@ -25,9 +25,13 @@ public class PlayerStateMachine : StateMachine
         ChangeState(new PlayerTestState(this));
     }
 
-    public void IncreaseLevel()
+    public void invokeEvents()
     {
-        GameEventHandler.Instance.OnPlayerLevelChanged?.Invoke(1);
+        //GameEventHandler.Instance.OnPlayerLevelChanged?.Invoke(1);
+        GameEventHandler.Instance.OnPlayerLogin?.Invoke();
+        GameEventHandler.Instance.OnPlayForTenMinutes?.Invoke(true);
+
+        Debug.Log("stateMaching invoke called");
     }
 
     private void OnTriggerEnter(Collider other)
