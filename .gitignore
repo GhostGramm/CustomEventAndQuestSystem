@@ -366,3 +366,7 @@ FodyWeavers.xsd
 /Temp
 /ProjectSettings
 /UserSettings
+/build
+/Assets/EOI Environment
+/Assets/LoadoutSceneAssets
+/Assets/Marshal
